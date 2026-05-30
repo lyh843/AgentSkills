@@ -1,0 +1,4 @@
+interface:
+  display_name: "Grounded File QA"
+  short_description: "Grounded Q&A from PDFs and local files"
+  default_prompt: "Use $grounded-file-qa to read the provided files, keep a compact evidence note, and answer my later questions from those sources."

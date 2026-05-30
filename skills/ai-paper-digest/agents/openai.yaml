@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI Paper Digest"
+  short_description: "抓取AI论文并支持后续深入分析与总结流程"
+  default_prompt: "Use $ai-paper-digest to collect today's AI papers, summarize them in Chinese, and keep context for follow-up analysis of specific papers."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Concept Wiki HTML"
+  short_description: "Build local-note grounded concept-network HTML pages."
+  default_prompt: "Use $concept-wiki-html to build a single-topic concept-network HTML page from my local notes and slides."

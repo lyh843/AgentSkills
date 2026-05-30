@@ -1,0 +1,4 @@
+interface:
+  display_name: "Battery Status"
+  short_description: "Read battery percentage, charging state, and current wattage"
+  default_prompt: "Use $battery-status to check the current battery and charging information on this machine and return it in the skill's compact format."

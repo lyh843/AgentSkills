@@ -1,0 +1,4 @@
+interface:
+  display_name: "Lecture Note Writer"
+  short_description: "Write course notes from slides in user style"
+  default_prompt: "Use $lecture-note-writer to read course slides, infer my note style from nearby notes, and rewrite the target markdown in the same format."
