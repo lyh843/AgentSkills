@@ -1,0 +1,4 @@
+interface:
+  display_name: "Scientific Plotting"
+  short_description: "Python research figures from chapter-based guidance"
+  default_prompt: "Use $ning-python-scientific-plotting to inspect my data and create a scientific figure with reproducible Python code and the relevant chapter guidance."

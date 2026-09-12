@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://code-wiki.local/schemas/wiki-1.0.json",
+  "title": "Code Wiki 1.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "generator", "repository", "tree"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "generator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version"],
+      "properties": {
+        "name": {"const": "code-wiki"},
+        "version": {"const": "0.1.0"}
+      }
+    },
+    "repository": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "root", "summary", "source_roots", "hash_algorithm", "tree_hash"],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "root": {"const": "."},
+        "summary": {"type": "string", "minLength": 1},
+        "source_roots": {"type": "array", "items": {"type": "string"}, "minItems": 1, "uniqueItems": true},
+        "hash_algorithm": {"const": "sha256"},
+        "tree_hash": {"$ref": "#/$defs/hash"}
+      }
+    },
+    "tree": {"$ref": "#/$defs/directory"}
+  },
+  "$defs": {
+    "hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "documentation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "status", "lines"],
+      "properties": {
+        "mode": {"enum": ["managed-header", "index-only"]},
+        "status": {"enum": ["current", "stale", "missing", "unsupported", "error"]},
+        "lines": {"type": "integer", "minimum": 0, "maximum": 15}
+      }
+    },
+    "file": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "kind", "language", "summary", "content_hash", "documentation_hash", "documentation"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "kind": {"enum": ["source", "test", "configuration", "documentation", "script", "fixture", "generated", "binary", "other"]},
+        "language": {"type": ["string", "null"]},
+        "summary": {"type": "string", "minLength": 1},
+        "content_hash": {"$ref": "#/$defs/hash"},
+        "documentation_hash": {"oneOf": [{"$ref": "#/$defs/hash"}, {"type": "null"}]},
+        "documentation": {"$ref": "#/$defs/documentation"}
+      }
+    },
+    "fileMap": {
+      "type": "object",
+      "additionalProperties": {"$ref": "#/$defs/file"}
+    },
+    "directoryMap": {
+      "type": "object",
+      "additionalProperties": {"$ref": "#/$defs/directory"}
+    },
+    "directory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "purpose", "summary", "files", "directories"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "purpose": {"type": "string", "minLength": 1},
+        "summary": {"type": "string", "minLength": 1},
+        "files": {"$ref": "#/$defs/fileMap"},
+        "directories": {"$ref": "#/$defs/directoryMap"}
+      }
+    }
+  }
+}
+
